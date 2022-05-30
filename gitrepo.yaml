@@ -1,0 +1,16 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: tekton-stuff
+  namespace: fleet-default
+spec:
+  repo: ssh://git@git-ssh.atoy.lol/home/tekton-stuff.git
+  clientSecretName: private-key
+  targets:
+  - name: main
+    clusterSelector:
+      matchLabels:
+        cluster: main
+  paths:
+  - ./common
+  - ./docker-build

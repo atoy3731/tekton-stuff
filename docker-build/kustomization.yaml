@@ -1,0 +1,5 @@
+resources:
+- pipeline.yaml
+- virtual-service.yaml
+- tasks/
+- triggers/

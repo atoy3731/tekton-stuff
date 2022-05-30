@@ -1,0 +1,36 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: gitea-trigger-template
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: staging
+    - name: gitrepositoryurl
+      description: The git repository url
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: docker-build-
+      spec:
+        serviceAccountName: build-bot
+        pipelineRef:
+          name: build-pipeline
+        workspaces:
+          - name: work
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 1Gi
+        params:
+          - name: gitea-url
+            value: '$(tt.params.gitrepositoryurl)'
+          - name: gitea-branch
+            value: '$(tt.params.gitrevision)'

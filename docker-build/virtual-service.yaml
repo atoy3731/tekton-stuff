@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: gitea-build-vs
+  namespace: tekton-pipelines
+spec:
+  gateways:
+  - istio-system/main
+  hosts:
+  - webhook.atoy.lol
+  http:
+  - match:
+    - uri:
+        prefix: "/build"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: el-gitea-webhook.tekton-pipelines.svc.cluster.local
+        port:
+          number: 8080

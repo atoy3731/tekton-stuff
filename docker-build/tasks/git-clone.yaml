@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+  namespace: tekton-pipelines
+  annotations:
+    description: Git Clone
+spec:
+  workspaces:
+  - name: work
+    mountPath: /work
+  params:
+  - name: gitea-url
+    type: string
+    description: ssh url for git repo
+  - name: gitea-branch
+    type: string
+    description: branch of git repo
+    default: main
+  steps:
+    - name: git-clone
+      image: alpine/git:latest
+      script: |
+        #!/usr/bin/env ash
+        ln -s /tekton/home/.ssh /root/.ssh
+
+        echo "Adding SSH key from service account to identity.."
+        eval $(ssh-agent)
+        ssh-add ~/.ssh/id_*
+
+        echo "Cloning.."
+        cd /work
+        echo "$(params.gitea-url)"
+        echo "$(params.gitea-branch)"
+        git clone $(params.gitea-url) source
+        cd source
+        git checkout $(params.gitea-branch)

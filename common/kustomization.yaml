@@ -1,0 +1,4 @@
+resources:
+- docker-secret.yaml
+- sa.yaml
+- secret.yaml

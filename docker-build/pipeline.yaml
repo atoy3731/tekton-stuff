@@ -1,0 +1,49 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-pipeline
+  namespace: tekton-pipelines
+spec:
+  workspaces:
+    - name: work
+  params:
+  - name: gitea-url
+    type: string
+    description: ssh url for git repo
+  - name: gitea-branch
+    type: string
+    description: branch of git repo
+    default: main
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: work
+          workspace: work
+      params:
+      - name: gitea-url
+        value: "$(params.gitea-url)"
+      - name: gitea-branch
+        value: "$(params.gitea-branch)"
+    - name: parse-config
+      taskRef:
+        name: parse-config
+      workspaces:
+        - name: work
+          workspace: work
+      runAfter:
+        - git-clone
+    - name: build-push
+      taskRef:
+        name: build-push
+      workspaces:
+        - name: work
+          workspace: work
+      params:
+      - name: build-path
+        value: "$(tasks.parse-config.results.build_path)"
+      - name: image
+        value: "$(tasks.parse-config.results.image):$(tasks.parse-config.results.tag)"
+      runAfter:
+        - parse-config

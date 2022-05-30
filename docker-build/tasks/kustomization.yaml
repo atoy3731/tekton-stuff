@@ -1,0 +1,4 @@
+resources:
+- git-clone.yaml
+- parse-config.yaml
+- build-push.yaml

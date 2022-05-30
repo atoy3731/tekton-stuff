@@ -1,0 +1,4 @@
+resources:
+- event-listener.yaml
+- trigger-binding.yaml
+- trigger-template.yaml

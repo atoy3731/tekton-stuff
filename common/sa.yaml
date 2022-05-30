@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-bot
+  namespace: tekton-pipelines
+secrets:
+  - name: gitea-key
+  - name: harbor-creds
