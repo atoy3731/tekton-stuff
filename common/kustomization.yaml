@@ -1,3 +1,5 @@
+namespace: tekton-builds
+
 resources:
 - docker-secret.yaml
 - sa.yaml

@@ -1,3 +1,5 @@
+namespace: tekton-builds
+
 resources:
 - event-listener.yaml
 - trigger-binding.yaml
