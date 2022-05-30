@@ -3,7 +3,6 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: gitea-trigger-template
-  namespace: tekton-pipelines
 spec:
   params:
     - name: gitrevision

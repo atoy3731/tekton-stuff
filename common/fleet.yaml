@@ -1,4 +1,4 @@
-defaultNamespace: tekton-pipelines
+defaultNamespace: tekton-builds
 
 kustomize:
   dir: "."

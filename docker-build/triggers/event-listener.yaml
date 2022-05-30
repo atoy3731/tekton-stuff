@@ -3,7 +3,6 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
   name: gitea-webhook
-  namespace: tekton-pipelines
 spec:
   serviceAccountName: pipeline
   triggers:

@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: docker-build
-  namespace: tekton-pipelines
 spec:
   workspaces:
     - name: work

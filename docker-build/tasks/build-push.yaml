@@ -2,10 +2,8 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: build-push
-  namespace: tekton-pipelines
   annotations:
-    description: |
-            A simple task that prints the date
+    description: build and push docker images
 spec:
   workspaces:
   - name: work
