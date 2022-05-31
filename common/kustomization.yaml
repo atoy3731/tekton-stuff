@@ -2,6 +2,6 @@ namespace: tekton-builds
 
 resources:
 - docker-secret.yaml
+- gitea-secret.yaml
 - sa.yaml
-- secret.yaml
 - rbac/
