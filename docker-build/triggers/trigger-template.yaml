@@ -10,13 +10,15 @@ spec:
       default: staging
     - name: gitrepositoryurl
       description: The git repository url
+    - name: gitrepositoryname
+      description: The git repository name
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
         generateName: docker-build-
         labels:
-          repoName: testing1234
+          repoName: '$(tt.params.gitrepositoryname)'
       spec:
         serviceAccountName: build-bot
         pipelineRef:
