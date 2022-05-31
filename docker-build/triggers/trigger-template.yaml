@@ -16,7 +16,7 @@ spec:
       metadata:
         generateName: docker-build-
         labels:
-          repoName: '$(tt.params.gitrepositoryname)'
+          repoName: testing1234
       spec:
         serviceAccountName: build-bot
         pipelineRef:
